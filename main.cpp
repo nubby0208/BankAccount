@@ -4,6 +4,7 @@
 #include <vector>
 #include <sstream>
 #include<memory>
+#include <algorithm>
 #include <cstdlib>//for exit
 #include "BankAccount.h"  //bad practice to include cpp files
 
@@ -28,7 +29,7 @@ int main() {
     printArray(accountsVector);
     
     cout<<"Largest Balance: "<<endl;
-    cout<<accountsVector[largest(accountsVector)]->toString()<<endl;
+cout<<accountsVector[largest(accountsVector)]->toString()<<endl;
     cout<<"Smallest Balance :"<<endl;
     cout<<accountsVector[smallest(accountsVector)]->toString()<<endl;
     cout<<"Using the static count, there are "<<BankAccount::count<< " accounts"<<endl;
@@ -73,12 +74,27 @@ void fillArray (ifstream &input,vector<shared_ptr<BankAccount>>  &accountsVector
     }
 
 }
+
 //presumes that negative balances will not be there
 int largest(vector<shared_ptr<BankAccount>>  &accountsVector){
  // ****write this method
+ 	auto comparison = [](shared_ptr<BankAccount> &a, shared_ptr<BankAccount> &b)
+        {
+            return a->getAccountBalance() < b->getAccountBalance();
+        };
+
+    auto max = std::max_element(accountsVector.begin(), accountsVector.end(), comparison);
+    return std::distance(accountsVector.begin(), max);
 }
 int smallest(vector<shared_ptr<BankAccount>>  &accountsVector){
 // *** write this method
+auto comparison = [](shared_ptr<BankAccount> &a, shared_ptr<BankAccount> &b)
+        {
+            return a->getAccountBalance() < b->getAccountBalance();
+        };
+
+    auto min = std::min_element(accountsVector.begin(), accountsVector.end(), comparison);
+    return std::distance(accountsVector.begin(), min);
 }
 bool  removeDuplicate(shared_ptr<BankAccount> account1, shared_ptr<BankAccount> account2)
 {
