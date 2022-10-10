@@ -56,7 +56,11 @@ catch (string message){
 }
 void checkDuplicates(vector<shared_ptr<BankAccount>>  &accountsVector){
   // *** Write this method
+		std::sort(accountsVector.begin(), accountsVector.end());
 
+    bool hasDuplicates = std::adjacent_find(accountsVector.begin(), accountsVector.end()) != accountsVector.end();
+    if(hasDuplicates)
+		cout<<"Duplicates found"<<endl;
     }
   
    
@@ -96,11 +100,19 @@ auto comparison = [](shared_ptr<BankAccount> &a, shared_ptr<BankAccount> &b)
     auto min = std::min_element(accountsVector.begin(), accountsVector.end(), comparison);
     return std::distance(accountsVector.begin(), min);
 }
-bool  removeDuplicate(shared_ptr<BankAccount> account1, shared_ptr<BankAccount> account2)
+bool  removeDuplicate(vector<shared_ptr<BankAccount>>  & accountsVector, shared_ptr<BankAccount> account)
 {
-
+	
   // write this method
-
+for (std::vector<shared_ptr<BankAccount>>::iterator it = accountsVector.begin(); it != accountsVector.end();)
+    {
+        if (*it == account){
+		
+            it = accountsVector.erase(it);
+            return true;
+        }
+    }
+    return false;
 }
 void printArray(vector<shared_ptr<BankAccount>>  &accountsVector){
    cout<<"FAVORITE BANK - CUSTOMER DETAILS "<<endl;
@@ -114,5 +126,7 @@ void printArray(vector<shared_ptr<BankAccount>>  &accountsVector){
 void insertAccounts(vector<shared_ptr<BankAccount>>  & accountsVector){
 
   //****write this method
-  
+    accountsVector.push_back(make_shared<BankAccount>("newbie2",20,200,2000));
+    accountsVector.push_back(make_shared<BankAccount>("newbie3",30,300,3000));
+    accountsVector.push_back(make_shared<BankAccount>("newbie4",40,400,4000));
 }
