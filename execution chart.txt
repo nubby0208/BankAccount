@@ -1,0 +1,7 @@
+1.0 main()
+	2.0 fillArray(input ifstream input, input vector<shared_ptr<BankAccount>> accountsVector)
+	2.1 printArray(input vector<shared_ptr<BankAccount>> accountsVector)
+	2.2 checkDuplicates(input vector<shared_ptr<BankAccount>> accountsVector)
+		3.0 return bool removeDuplicate(input vector<shared_ptr<BankAccount>> &accountsVector, input shared_ptr<BankAccount> account);
+	2.3 insertAccounts(input vector<shared_ptr<BankAccount>> &accountVector);
+	2.4 printArray(input vector<shared_ptr<BankAccount>> accountsVector)

@@ -15,6 +15,7 @@ int largest(vector<shared_ptr<BankAccount>> &accountsVector);
 int smallest(vector<shared_ptr<BankAccount>> &accountsVector);
 void printArray(vector<shared_ptr<BankAccount>>&accountsVector);
 void checkDuplicates(vector<shared_ptr<BankAccount>> &accountsVector);
+bool removeDuplicate(vector<shared_ptr<BankAccount>> &accountsVector, shared_ptr<BankAccount> account);
 void insertAccounts(vector<shared_ptr<BankAccount>> &accountVector);
 int main() {
   vector<shared_ptr<BankAccount>> accountsVector;
@@ -58,11 +59,17 @@ void checkDuplicates(vector<shared_ptr<BankAccount>>  &accountsVector){
   // *** Write this method
 		std::sort(accountsVector.begin(), accountsVector.end());
 
-    bool hasDuplicates = std::adjacent_find(accountsVector.begin(), accountsVector.end()) != accountsVector.end();
-    if(hasDuplicates)
-		cout<<"Duplicates found"<<endl;
+    auto i1 = std::adjacent_find(accountsVector.begin(), accountsVector.end());
+    
+    if (i1 == accountsVector.end()) {
+        std::cout << "No Duplicates\n";
+    } else {
+        std::cout << "Duplicates Found";
+//                  << std::distance(v1.begin(), i1) << ", *i1 = "
+//                  << *i1 << '\n';
+		removeDuplicate(accountsVector, accountsVector[std::distance(accountsVector.begin(), i1)]);
     }
-  
+}
    
 void fillArray (ifstream &input,vector<shared_ptr<BankAccount>>  &accountsVector){
    string accountName;string lastName;string firstName,inputLine;
