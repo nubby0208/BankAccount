@@ -1,0 +1,8 @@
+Matilda Patel 453456 1232 -4.00 
+Fernando Diaz 323468 1234  250.0
+Vai vu        432657 1240  987.56
+Howard Chen   234129 1236  194.56
+Vai vu        432657 1240  -888987.56
+Sugata Misra  987654 1238  10004.8
+Fernando Diaz 323468 1234 8474.0
+Lily Zhaou    786534 1242  001.98
