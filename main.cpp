@@ -15,7 +15,7 @@ int largest(vector<shared_ptr<BankAccount>> &accountsVector);
 int smallest(vector<shared_ptr<BankAccount>> &accountsVector);
 void printArray(vector<shared_ptr<BankAccount>>&accountsVector);
 void checkDuplicates(vector<shared_ptr<BankAccount>> &accountsVector);
-bool removeDuplicate(vector<shared_ptr<BankAccount>> &accountsVector, shared_ptr<BankAccount> account);
+bool removeDuplicate(shared_ptr<BankAccount>& account1, shared_ptr<BankAccount>& account2);
 void insertAccounts(vector<shared_ptr<BankAccount>> &accountVector);
 int main() {
   vector<shared_ptr<BankAccount>> accountsVector;
@@ -57,18 +57,14 @@ catch (string message){
 }
 void checkDuplicates(vector<shared_ptr<BankAccount>>  &accountsVector){
   // *** Write this method
-		std::sort(accountsVector.begin(), accountsVector.end());
-
-    auto i1 = std::adjacent_find(accountsVector.begin(), accountsVector.end());
-    
-    if (i1 == accountsVector.end()) {
-        std::cout << "No Duplicates\n";
-    } else {
-        std::cout << "Duplicates Found";
-//                  << std::distance(v1.begin(), i1) << ", *i1 = "
-//                  << *i1 << '\n';
-		removeDuplicate(accountsVector, accountsVector[std::distance(accountsVector.begin(), i1)]);
-    }
+  for(int i=0; i < accountsVector.size(); i++){
+   	for(int j=i+1; j < accountsVector.size(); j++){
+   		if(removeDuplicate(accountsVector[i], accountsVector[j]))
+   		{
+   			cout<<"Duplicates Found at "<<i<<" and "<<j<<endl;
+		}
+	}
+	}
 }
    
 void fillArray (ifstream &input,vector<shared_ptr<BankAccount>>  &accountsVector){
@@ -107,19 +103,10 @@ auto comparison = [](shared_ptr<BankAccount> &a, shared_ptr<BankAccount> &b)
     auto min = std::min_element(accountsVector.begin(), accountsVector.end(), comparison);
     return std::distance(accountsVector.begin(), min);
 }
-bool  removeDuplicate(vector<shared_ptr<BankAccount>>  & accountsVector, shared_ptr<BankAccount> account)
+bool  removeDuplicate(shared_ptr<BankAccount>& account1, shared_ptr<BankAccount>& account2)
 {
-	
   // write this method
-for (std::vector<shared_ptr<BankAccount>>::iterator it = accountsVector.begin(); it != accountsVector.end();)
-    {
-        if (*it == account){
-		
-            it = accountsVector.erase(it);
-            return true;
-        }
-    }
-    return false;
+	return account1->equals(account2);
 }
 void printArray(vector<shared_ptr<BankAccount>>  &accountsVector){
    cout<<"FAVORITE BANK - CUSTOMER DETAILS "<<endl;
